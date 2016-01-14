@@ -19,16 +19,16 @@ Public Class Form_log_in
         password_check() 'check the password
     End Sub
 
-    Private Sub password_check()
-        If TB_password.Text = password_low And RB_manager.Checked Then
+    Private Sub password_check() 'check password
+        If TB_password.Text = password_low And RB_manager.Checked Then 'manager password
             LB_hint.Text = ""
-            level = False
+            level = False 'manager level
             Me.Enabled = False
             Main_Form.Show()
             Me.Hide()
-        ElseIf TB_password.Text = password_high And RB_boss.Checked Then
+        ElseIf TB_password.Text = password_high And RB_boss.Checked Then 'boss password
             LB_hint.Text = ""
-            level = True
+            level = True 'manager level
             Me.Enabled = False
             Main_Form.Show()
             Me.Hide()
@@ -37,36 +37,36 @@ Public Class Form_log_in
         ElseIf num_check = 0 Then
             Me.Close()
         Else
-            LB_hint.Text = "you have " + num_check.ToString() + " more time to enter the password"
-            num_check -= 1
+            LB_hint.Text = "you have " + num_check.ToString() + " more time to enter the password" 'tell user how many times left
+            num_check -= 1 'chance minus one
         End If
         TB_password.Clear()
     End Sub
 
-    Public Sub password_change(new_password As String)
-        Dim sql_update As New SqlCommand("UPDATE warehouse_password SET password = @password WHERE ID = @ID", cs)
-        sql_update.Parameters.Add("password", SqlDbType.BigInt).Value = new_password
-        If level Then
-            sql_update.Parameters.Add("ID", SqlDbType.TinyInt).Value = 1
+    Public Sub password_change(new_password As String) 'change passward
+        Dim sql_update As New SqlCommand("UPDATE warehouse_password SET password = @password WHERE ID = @ID", cs) 'sql update command
+        sql_update.Parameters.Add("password", SqlDbType.BigInt).Value = new_password 'add parameter password
+        If level Then 'boss
+            sql_update.Parameters.Add("ID", SqlDbType.TinyInt).Value = 1 'ID
             password_high = new_password
-        Else
-            sql_update.Parameters.Add("ID", SqlDbType.TinyInt).Value = 2
+        Else 'manager
+            sql_update.Parameters.Add("ID", SqlDbType.TinyInt).Value = 2 'ID
             password_low = new_password
         End If
         cs.Open()
-        sql_update.ExecuteNonQuery()
+        sql_update.ExecuteNonQuery() 'execute the command
         cs.Close()
     End Sub
 
-    Public Function password_get() As String
-        If level Then
+    Public Function password_get() As String 'get password for different level used in form_change password
+        If level Then 'boss
             Return password_high
-        Else
+        Else 'manager
             Return password_low
         End If
     End Function
 
-    Public Function level_get() As Boolean
+    Public Function level_get() As Boolean 'get level of the user used in main_form
         Return level
     End Function
 End Class
