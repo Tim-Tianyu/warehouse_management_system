@@ -8,17 +8,17 @@ Public Class Form_new_worker
         Form_worker.Enabled = True
     End Sub
 
-    Private Sub TB_name_TextChanged(sender As Object, e As EventArgs) Handles TB_name.TextChanged
+    Private Sub TB_name_TextChanged(sender As Object, e As EventArgs) Handles TB_name.TextChanged 'check name
         Dim flag As Boolean
         Try
             Dim a As String = TB_name.Text
             LB_hint_name.Text = ""
             flag = True
-            If a.Length > 4 Then
+            If a.Length > 4 Then 'longest normal chinese name i know is only 4 characters
                 LB_hint_name.Text = "too long, should be 4 or less"
                 flag = False
             End If
-        Catch ex As Exception
+        Catch ex As Exception 'this exception may not be triggered any way
             LB_hint_name.Text = "please enter proper name"
             flag = False
         End Try
@@ -43,19 +43,19 @@ Public Class Form_new_worker
     Private Function write() As Boolean
 
         Dim asnr(20) As Byte
-        Dim aBuffer(256) As Byte
+        Dim aBuffer(256) As Byte 'i do not know if 256 is really needed
         Dim a(20) As Byte
         Dim b(256) As Byte
 
         Dim ret As Integer
-        ret = MF_Getsnr(0, 0, a(0), b(0))
-        If ret = 0 Then
-            Randomize()
-            Dim C0 As Byte = Int(Rnd() * 255)
+        ret = MF_Getsnr(0, 0, a(0), b(0)) 'the function in .dll used to read card
+        If ret = 0 Then 'if a card be readed
+            Randomize() 'initialize rnd()
+            Dim C0 As Byte = Int(Rnd() * 255) 'random number between 0 and 255
             Dim C1 As Byte = Int(Rnd() * 255)
             Dim C2 As Byte = Int(Rnd() * 255)
             Dim C3 As Byte = Int(Rnd() * 255)
-            Dim Cver As Byte = Int(Rnd() * 255)
+            Dim Cver As Byte = Int(Rnd() * 255) 'actually there is a risk of 2 or more workers have same card number because i use random number, but the chance is too small as the worker number can not be more than 256
             Dim sqlcmd As New SqlCommand("INSERT INTO warehouse_worker (Wname,Wstate,Wcard_0,Wcard_1,Wcard_2,Wcard_3,Wcard_ver) VALUES (@name,@state,@c0,@c1,@c2,@c3,@cver)", cs)
             With sqlcmd.Parameters
                 .Add("name", SqlDbType.NChar).Value = TB_name.Text
@@ -64,24 +64,29 @@ Public Class Form_new_worker
                 .Add("c1", SqlDbType.TinyInt).Value = C1
                 .Add("c2", SqlDbType.TinyInt).Value = C2
                 .Add("c3", SqlDbType.TinyInt).Value = C3
-                .Add("cver", SqlDbType.TinyInt).Value = Cver
+                .Add("cver", SqlDbType.TinyInt).Value = Cver 'add random number into the database
             End With
-            ret = ControlBuzzer(4, 1, aBuffer(0))   'T5577 Unprotected
+            ret = ControlBuzzer(4, 1, aBuffer(0))   'T5577 Unprotected (this is a signal send to the card reader
             asnr(0) = 0
             asnr(1) = Cver
             asnr(2) = C0
             asnr(3) = C1
             asnr(4) = C2
-            asnr(5) = C3
+            asnr(5) = C3 'put the random number in correct order
 
-            ret = MF_Write(0, 1, 1, asnr(0), aBuffer(0))
-            'ret = ControlBuzzer(1, 1, aBuffer(0))
-            cs.Open()
-            sqlcmd.ExecuteNonQuery()
-            cs.Close()
+            ret = MF_Write(0, 1, 1, asnr(0), aBuffer(0)) 'write the number in
+            'ret = ControlBuzzer(1, 1, aBuffer(0)) 'to make sound
+            Try
+                cs.Open()
+                sqlcmd.ExecuteNonQuery()
+                cs.Close()
+            Catch ex As Exception 'the worker number may become higher than 256 because the current number is around 100
+                MsgBox("no more worker can be added")
+                MsgBox(ex.ToString) 'make sure there is no other causes of exception
+            End Try
             Return True
         Else
-            Return False
+            Return False 'if no card be readed
         End If
     End Function
 End Class

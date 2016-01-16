@@ -62,7 +62,7 @@ Public Class Main_Form
         End If
         If TB_worker_name.Text.Length <> 0 Then
             STR = STR + " and Wname = '" + TB_worker_name.Text + "'" 'worker name
-        End If
+        End If 'user may enter some sqlcommad in material_name or worker_name, then the table get will be very messy, but that is what the user want get if they really enter those thing, so just let it go
         If CB_year.Text.Length = 4 And IsNumeric(CB_year.Text) Then 'when the length is excatly 4 number yyyy
             STR = STR + " and year(Odatetime) ='" + CB_year.Text + "'" 'year
         ElseIf CB_year.Text.Length <> 0 Then 'or when it is null

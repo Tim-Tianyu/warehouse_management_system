@@ -1,0 +1,19 @@
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\bin\Release\Warehouse Management System.exe.config
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse Management System.vbproj.ResolveComReference.cache
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\bin\Release\Warehouse Management System.exe
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\bin\Release\Warehouse Management System.pdb
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\bin\Release\Warehouse Management System.xml
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse_Management_System.Form_change_password.resources
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse_Management_System.Form_log_in.resources
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse_Management_System.Form_new_kind.resources
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse_Management_System.Form_new_material.resources
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse_Management_System.Form_new_worker.resources
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse_Management_System.Form_search.resources
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse_Management_System.Form_take_out.resources
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse_Management_System.Form_worker.resources
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse_Management_System.Main_Form.resources
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse_Management_System.Resources.resources
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse Management System.vbproj.GenerateResource.Cache
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse Management System.exe
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse Management System.xml
+C:\Users\hp\documents\visual studio 2013\Projects\Warehouse Management System\Warehouse Management System\obj\Release\Warehouse Management System.pdb
