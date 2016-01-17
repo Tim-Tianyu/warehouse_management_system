@@ -19,7 +19,7 @@ Public Class Form_search
         sqlcmd.Parameters.Item("name").Value = "%" + TB_search.Text + "%" 'search any record that worker/material name contain the string entered by user
         Dim sqladp As New SqlDataAdapter(sqlcmd)
         sqladp.Fill(tbl) 'fill tbl
-        DGV_result.DataSource = tbl 'but datasource in grid
+        DGV_result.DataSource = tbl 'put datasource in grid
     End Sub
 
     Private Sub DGV_result_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_result.CellClick

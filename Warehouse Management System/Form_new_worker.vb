@@ -17,6 +17,16 @@ Public Class Form_new_worker
             If a.Length > 4 Then 'longest normal chinese name i know is only 4 characters
                 LB_hint_name.Text = "too long, should be 4 or less"
                 flag = False
+            Else
+                Dim i As Integer
+                For i = 0 To TB_name.Text.Length - 1
+                    If IsNumeric(TB_name.Text(i)) Then
+                        flag = False
+                    End If
+                Next
+                If Not flag Then
+                    LB_hint_name.Text = "can not contain numerical value"
+                End If
             End If
         Catch ex As Exception 'this exception may not be triggered any way
             LB_hint_name.Text = "please enter proper name"

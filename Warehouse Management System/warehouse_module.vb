@@ -43,7 +43,7 @@ Module warehouse_module
         'Dim hint As String = ""
         Try
             a = Int(name) 'this line will have an error if name have any non-numeric char in it
-            Dim sqlcommand As New SqlCommand("SELECT Woker_ID FROM warehouse_worker WHERE Worker_ID=@ID", cs)
+            Dim sqlcommand As New SqlCommand("SELECT Worker_ID FROM warehouse_worker WHERE Worker_ID=@ID", cs)
             sqlcommand.Parameters.Add("@ID", SqlDbType.TinyInt).Value = a
             Dim dbadptor As New SqlDataAdapter(sqlcommand)
             Dim tbl As New DataTable()
