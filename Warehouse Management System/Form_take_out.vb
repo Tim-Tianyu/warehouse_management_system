@@ -1,11 +1,18 @@
 ﻿Imports System.Configuration
 Imports System.Data.SqlClient
-
+'****************************************************************************************************
+'this from will take record when worker want to take out material
+'****************************************************************************************************
 Public Class Form_take_out
     Dim sqlcs As String = ConfigurationManager.ConnectionStrings("connect").ConnectionString
     Dim cs As New SqlConnection(sqlcs)
     Dim check_state_amount As Boolean = False
     Dim ID As Integer
+
+    '****************************************************************************************************
+    'when user click BT_search_worker button, means they want to find a worker
+    'this subroutine will open form_search and send information to form_search and tell form_search it need to search worker or material and tell it the resualt show return to which textbox on which form
+    '****************************************************************************************************
     Private Sub BT_search_worker_Click(sender As Object, e As EventArgs) Handles BT_search_worker.Click
         Form_search.LB_state.Text = "worker" 'tell form_search we need to search worker
         Form_search.Find_TB("TO worker") 'tell form_search that this bottum use it
@@ -14,6 +21,10 @@ Public Class Form_take_out
         Me.Enabled = False
     End Sub
 
+    '****************************************************************************************************
+    'when user click BT_search_material button, means they want to find a material
+    'this subroutine will open form_search and send information to form_search and tell form_search it need to search worker or material and tell it the resualt show return to which textbox on which form
+    '****************************************************************************************************
     Private Sub BT_search_material_Click(sender As Object, e As EventArgs) Handles BT_search_material.Click
         Form_search.LB_state.Text = "material" 'tell form_search we need to search material
         Form_search.Find_TB("TO material") 'tell form_search that this bottum use it
@@ -22,6 +33,10 @@ Public Class Form_take_out
         Me.Enabled = False
     End Sub
 
+    '****************************************************************************************************
+    'when user click BT_confirm
+    'this subroutine will check the worker id/name and material id/name use Check_material() and Check_worker(), if can not find id/name in the table, it will give user hint from the return value of Check_worker and Check_material, if the name/id is valid than it will check the state of worker and the current stock of the material, if the state is false or the number take out is bigger than stock, it will tell user, at last if all the information entered is valid, it will read the card of worker using scan() and if scan() return true(card is valid) it will insert a new record to warehouse_out_record and update the stock of that material in warehouse_material
+    '****************************************************************************************************
     Private Sub BT_confirm_Click(sender As Object, e As EventArgs) Handles BT_confirm.Click
         Dim material_id As Integer = Check_material(TB_material.Text) 'check material name/id return id
         Dim worker_id As Integer = Check_worker(TB_worker.Text) 'check worker name/id return id
@@ -91,12 +106,16 @@ Public Class Form_take_out
         End If
     End Sub
 
+    '****************************************************************************************************
+    'when user change the text in TB_amount
+    'this subroutine will check if the the text enter is number, and positve, and not too big, if yes check_state_amount will become true, else check_state_amount will become false and it will give user hint  on the text entered
+    '****************************************************************************************************
     Private Sub TB_amount_TextChanged(sender As Object, e As EventArgs) Handles TB_amount.TextChanged 'primary check
         Try
             Dim a As Integer = Int(TB_amount.Text)
             LB_hint_amount.Text = ""
             check_state_amount = True
-            If a > 32767 Then 'the stock can not be bigger than 32767, i can not select stock here because user may not enter the id at this stage, but give a primary check still save a lot of time
+            If a > 32767 Then 'the stock can not be bigger than 32767, i can not select stock here because user may not enter the id/name at this stage, but give a primary check still save a lot of time
                 LB_hint_amount.Text = "too big, must below stock"
                 check_state_amount = False
             ElseIf a < 0 Then
@@ -110,6 +129,9 @@ Public Class Form_take_out
         End Try
     End Sub
 
+    '****************************************************************************************************
+    'this function will read the card using MF_Getsnr() which is the function in the MF1.dll it will return 0 if it read the card and it will put the number get into aBuffer and asnr than compare the number in the card and the number in worker table if they are same that means the card used is right card and this function will return true, else if the numbers are not same or if it didn't read a card it will return false
+    '****************************************************************************************************
     Private Function scan() As Boolean 'read the card and compare to numbers in the database 
         Dim sqlcmd As New SqlCommand("SELECT Wcard_0, Wcard_1, Wcard_2, Wcard_3, Wcard_ver FROM warehouse_worker WHERE Worker_ID=@ID", cs) 'select the numbers from database
         sqlcmd.Parameters.Add("ID", SqlDbType.TinyInt).Value = ID 'add parameter
@@ -143,6 +165,9 @@ Public Class Form_take_out
         End If
     End Function
 
+    '****************************************************************************************************
+    'this subroutine will enable the main_from after user close this form
+    '****************************************************************************************************
     Private Sub Form_take_out_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
         Main_Form.Enabled = True
     End Sub

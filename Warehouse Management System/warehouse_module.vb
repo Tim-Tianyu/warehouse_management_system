@@ -2,6 +2,10 @@
 Imports System.Configuration
 Imports System.Data.SqlClient
 Module warehouse_module
+
+    '****************************************************************************************************
+    'this function will try to find the material id/name in the table, if it find the same id/name it will return the id of that material, at first it will try to covert the string into interger if it get a exception which means the string contain non numerical character(name) if not it means it is id, than it will select Material_id from warehosue_material where the the name/id is same as the name/id entered if nothing can be find in the table it means there is no such name/id, also there may be materials that have same name in this case the user must entered id
+    '****************************************************************************************************
     Public Function Check_material(name As String) As Integer 'this will check the material name/id is valid or not
         Dim a As Integer = 0
         Dim sqlcs As String = ConfigurationManager.ConnectionStrings("connect").ConnectionString
@@ -18,7 +22,7 @@ Module warehouse_module
                 'hint = "no such ID"
                 a = 77777 'this number can not become id because it is too big, i use this as a signal show that there is no such id
             End If
-        Catch ex1 As Exception 'if there is a exceotion that means it is name not id
+        Catch ex1 As Exception 'if there is a exception that means it is name not id
             Dim sqlcommand As New SqlCommand("SELECT Material_ID FROM warehouse_material WHERE Mname = @name", cs)
             sqlcommand.Parameters.Add("@name", SqlDbType.NChar).Value = name 'name
             Dim dbadptor As New SqlDataAdapter(sqlcommand)
@@ -36,6 +40,10 @@ Module warehouse_module
         End Try
         Return a
     End Function
+
+    '****************************************************************************************************
+    'this function will try to find the worker id/name in the table, if it find the same id/name it will return the id of that worker, at first it will try to covert the string into interger if it get a exception which means the string contain non numerical character(name) if not it means the string entered is id, than it will select Worker_id from warehosue_worker where the the name/id is same as the name/id entered if nothing can be find in the table it means there is no such name/id, also there may be workers that have same name in this case the user must entered id
+    '****************************************************************************************************
     Public Function Check_worker(name As String) As Integer 'this function is simialer to Check_worker(),just sqlcommand is different
         Dim a As Integer = 0
         Dim sqlcs As String = ConfigurationManager.ConnectionStrings("connect").ConnectionString
@@ -75,7 +83,7 @@ Module warehouse_module
     Declare Function MF_Halt Lib "MF1.dll" () As Integer
     Declare Function ControlLED Lib "MF1.dll" (ByVal arg1 As Byte, ByVal arg2 As Byte, ByRef arg3 As Byte) As Integer
     Declare Function ControlBuzzer Lib "MF1.dll" (ByVal arg1 As Byte, ByVal arg2 As Byte, ByRef arg3 As Byte) As Integer 'make sound, as I know
-    Declare Function MF_Getsnr Lib "MF1.dll" (ByVal arg1 As Byte, ByVal arg2 As Byte, ByRef arg3 As Byte, ByRef arg4 As Byte) As Integer 'return 0 if read a card,else return 1, value will be write in arg4
+    Declare Function MF_Getsnr Lib "MF1.dll" (ByVal arg1 As Byte, ByVal arg2 As Byte, ByRef arg3 As Byte, ByRef arg4 As Byte) As Integer 'return 0 if read a card,else return 1, value will be write in arg4 and arg3
     Declare Function MF_Read Lib "MF1.dll" (ByVal arg1 As Byte, ByVal arg2 As Byte, ByVal arg3 As Byte, ByRef arg4 As Byte, ByRef arg5 As Byte) As Integer
     Declare Function MF_Write Lib "MF1.dll" (ByVal arg1 As Byte, ByVal arg2 As Byte, ByVal arg3 As Byte, ByRef arg4 As Byte, ByRef arg5 As Byte) As Integer 'put value in arg3 to write into the card
     Declare Function MF_InitValue Lib "MF1.dll" (ByVal arg1 As Byte, ByVal arg2 As Byte, ByRef arg3 As Byte, ByRef arg4 As Byte) As Integer

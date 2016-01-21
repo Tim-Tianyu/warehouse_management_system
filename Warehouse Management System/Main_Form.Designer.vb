@@ -46,7 +46,6 @@ Partial Class Main_Form
         Me.BT_password = New System.Windows.Forms.Button()
         Me.BT_log_out = New System.Windows.Forms.Button()
         Me.SFD_save = New System.Windows.Forms.SaveFileDialog()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.LB_hint_search = New System.Windows.Forms.Label()
         CType(Me.DGV_record_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -263,15 +262,6 @@ Partial Class Main_Form
         Me.BT_log_out.Text = "log out"
         Me.BT_log_out.UseVisualStyleBackColor = True
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(309, 38)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 31
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'LB_hint_search
         '
         Me.LB_hint_search.AutoSize = True
@@ -287,7 +277,6 @@ Partial Class Main_Form
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(984, 579)
         Me.Controls.Add(Me.LB_hint_search)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.BT_log_out)
         Me.Controls.Add(Me.BT_password)
         Me.Controls.Add(Me.Label6)
@@ -346,7 +335,6 @@ Partial Class Main_Form
     Friend WithEvents BT_password As System.Windows.Forms.Button
     Friend WithEvents BT_log_out As System.Windows.Forms.Button
     Friend WithEvents SFD_save As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents LB_hint_search As System.Windows.Forms.Label
 
 End Class

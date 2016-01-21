@@ -4,6 +4,10 @@ Imports System.Data.SqlClient
 Imports Microsoft.VisualBasic
 Imports System.IO
 Imports Microsoft.Office.Interop
+
+'****************************************************************************************************
+'this form is the "main form",also user can see the record table in the grid and convert the table into excel file
+'****************************************************************************************************
 Public Class Main_Form
     Dim sqlcs As String = ConfigurationManager.ConnectionStrings("connect").ConnectionString 'get the connection string
     Dim cs As New SqlConnection(sqlcs) 'connection to the database
@@ -11,11 +15,15 @@ Public Class Main_Form
     Dim oExcel As New Excel.Application 'excel application
     Dim oBook As Excel.Workbook 'excel workbook
     Dim oSheet As Excel.Worksheet 'excel worksheet
+
+    '****************************************************************************************************
+    'this subroutine will load the warehouse_record table into the DGV_record_table grid, user can give different condition(time, name of the worker/material), and only the record accord with the condition given will be load
+    '****************************************************************************************************
     Private Sub load_table()
         Dim sqlcomd As New SqlCommand("select Mname as 材料名,Mtype as 类型,Material_ID as 材料ID,Wname as 工人名,Wstate as 状态,Worker_ID as 工人ID,Onum_take as 取货量,Onum_left as 余货量,Odatetime as 时间 from warehouse_out_record, warehouse_worker, warehouse_material where (Material_ID_FK=Material_ID and Worker_ID_FK=Worker_ID) " + sqlstring(), cs) 'command to select the take out record and sqlstring is the condition
         Dim sqladp As New SqlDataAdapter(sqlcomd) 'dataadapter
         sqladp.Fill(table) 'fill the data to the table
-        With DGV_record_table 'rewrite some poperty for datagridvie
+        With DGV_record_table 'rewrite some poperty for datagridview
             .DataSource = table
             .Columns("工人ID").Visible = False
             .Columns("材料ID").Visible = False
@@ -31,14 +39,23 @@ Public Class Main_Form
         End With
     End Sub
 
+    '****************************************************************************************************
+    'when user close this form, user actually want to close the program, so we need to close form_log_in which is now invisible, then the whole program will be close
+    '****************************************************************************************************
     Private Sub Main_Form_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed 'after tis form be close
         Form_log_in.Close() 'form_log_in is actually the main from, close it to close the program
     End Sub
 
+    '****************************************************************************************************
+    'when this form load, all the record will be load because no condition have given
+    '****************************************************************************************************
     Private Sub Main_Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load 'when this form be loaded
         load_table() 'load datagrid view
     End Sub
 
+    '****************************************************************************************************
+    'user can choose to show or hide worker_id, material_id, state of worker by tick or untick the checkbox correspond, so when the checkstate of checkbox change, visible porperty will be change
+    '****************************************************************************************************
     Private Sub CB_worker_id_CheckedChanged(sender As Object, e As EventArgs) Handles CB_worker_id.CheckedChanged 'when the user tick or untick the checkbox
         DGV_record_table.Columns("工人ID").Visible = CB_worker_id.CheckState 'make it visible or invisible depend on the state of check box
     End Sub
@@ -51,12 +68,19 @@ Public Class Main_Form
         DGV_record_table.Columns("状态").Visible = CB_worker_state.CheckState
     End Sub
 
+    '****************************************************************************************************
+    'when user click the BT_search button, reload the table  use load_table()
+    '****************************************************************************************************
     Private Sub BT_search_Click(sender As Object, e As EventArgs) Handles BT_search.Click 'when the user click the search button
         table.Clear() 'clear the table
         load_table() 'reload the table
     End Sub
+
+    '****************************************************************************************************
+    'this function will return string of the condition given by the user, the string will be putted in sqlcommand in load_table()
+    '****************************************************************************************************
     Private Function sqlstring() As String 'will return condition
-        Dim STR As String = "" 'notice that line 71-80 is similar as 66-70
+        Dim STR As String = ""
         If TB_material_name.Text.Length <> 0 Then 'when there is any character
             STR = STR + " and Mname = '" + TB_material_name.Text + "'" 'material name condition add
         End If
@@ -66,26 +90,32 @@ Public Class Main_Form
         If CB_year.Text.Length = 4 And IsNumeric(CB_year.Text) Then 'when the length is excatly 4 number yyyy
             STR = STR + " and year(Odatetime) ='" + CB_year.Text + "'" 'year
         ElseIf CB_year.Text.Length <> 0 Then 'or when it is null
-            LB_hint_search.Text = "year in 4 number" 'give user a hint
+            LB_hint_search.Text = "year in 4 numbers" 'give user a hint
         End If
         If CB_month.Text.Length = 2 And IsNumeric(CB_month.Text) Then 'mm
             STR = STR + " and month(Odatetime) ='" + CB_month.Text + "'" 'month
         ElseIf CB_month.Text.Length <> 0 Then
-            LB_hint_search.Text = LB_hint_search.Text + " month in 2 number"
+            LB_hint_search.Text = LB_hint_search.Text + " month in 2 numbers"
         End If
         If CB_day.Text.Length = 2 And IsNumeric(CB_day.Text) Then 'dd
             STR = STR + " and day(Odatetime) ='" + CB_day.Text + "'" 'day
         ElseIf CB_day.Text.Length <> 0 Then
-            LB_hint_search.Text = LB_hint_search.Text + " day in 2 number"
+            LB_hint_search.Text = LB_hint_search.Text + " day in 2 numbers"
         End If
         Return STR 'return the condition
     End Function
 
+    '****************************************************************************************************
+    'this subroutine will load the form_new_material used to add material
+    '****************************************************************************************************
     Private Sub BT_new_material_Click(sender As Object, e As EventArgs) Handles BT_new_material.Click 'when the user click new material button
         Form_new_material.Show() 'show the form
         Me.Enabled = False 'unable this form
     End Sub
 
+    '****************************************************************************************************
+    'this subroutine will load the form_search and tell form_search to search worker and put search result in which textbox
+    '****************************************************************************************************
     Private Sub BT_search_worker_Click(sender As Object, e As EventArgs) Handles BT_search_worker.Click 'search the worker name
         Form_search.LB_state.Text = "worker" 'tell form_search we need to search worker table
         Form_search.Find_TB("MF worker") 'tell form_search this button and this form activate it
@@ -94,24 +124,38 @@ Public Class Main_Form
         Me.Enabled = False 'unable this form(I don't want to say this every time)
     End Sub
 
+    '****************************************************************************************************
+    'this subroutine will load the form_search and tell form_search to search material and put search result in which text box
+    '****************************************************************************************************
     Private Sub BT_search_material_Click(sender As Object, e As EventArgs) Handles BT_search_material.Click 'search the material name
-        Form_search.LB_state.Text = "material" 'notice: similar to 89-95
+        Form_search.LB_state.Text = "material" '
         Form_search.Find_TB("MF material")
         Form_search.TB_search.Text = TB_material_name.Text
         Form_search.Show()
         Me.Enabled = False
     End Sub
 
+
+    '****************************************************************************************************
+    'this subroutine will load form_change_password used to change the password of user
+    '****************************************************************************************************
     Private Sub BT_password_Click(sender As Object, e As EventArgs) Handles BT_password.Click 'user want to change passwrd
         Form_change_password.Show()
         Me.Enabled = False
     End Sub
-    
+
+
+    '****************************************************************************************************
+    'this subroutine will load form_take_out used to take record of take out material
+    '****************************************************************************************************
     Private Sub BT_out_material_Click(sender As Object, e As EventArgs) Handles BT_out_material.Click 'user want to take out material
         Form_take_out.Show()
         Me.Enabled = False
     End Sub
 
+    '****************************************************************************************************
+    'this subroutine will load form_worker used to manage worker, but only boss can use this part
+    '****************************************************************************************************
     Private Sub BT_edit_worker_Click(sender As Object, e As EventArgs) Handles BT_edit_worker.Click 'user want to edit worker
         If Form_log_in.level_get() Then 'from form_log_in we get the level of user
             Form_worker.Show()
@@ -121,12 +165,18 @@ Public Class Main_Form
         End If
     End Sub
 
+    '****************************************************************************************************
+    'this subroutine will load form_log_in, and make this form invisible, used to change user(boss/manager)
+    '****************************************************************************************************
     Private Sub BT_log_out_Click(sender As Object, e As EventArgs) Handles BT_log_out.Click 'user want to log off
         Me.Hide() 'hide this form
         Form_log_in.Enabled = True 'enable form_log_in
         Form_log_in.Show()
     End Sub
 
+    '****************************************************************************************************
+    'this subroutine will save the data in table as excel file(.xlsx), it will load SFD_save(savefiledialog) for user to choose the address and enter file name, then it will put all the column name and all the items in table into excel worksheet using loop and at last save the file as given name in give address
+    '****************************************************************************************************
     Private Sub BT_save_as_Click(sender As Object, e As EventArgs) Handles BT_save_as.Click 'user want to save the out record table
         oBook = oExcel.Workbooks().Add 'add workbook to application
         oSheet = oBook.Worksheets(1) 'add worksheet to workbook
@@ -159,17 +209,5 @@ Public Class Main_Form
             End Try
 
         End If
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click 'if you see this, I forgot to delete this
-        Dim ret As Integer
-        Dim a(20) As Byte
-        Dim b(256) As Byte
-        ret = MF_Getsnr(0, 0, a(0), b(0))
-        MsgBox(ret.ToString)
-        MsgBox(b(0).ToString)
-        MsgBox(b(1).ToString)
-        MsgBox(b(2).ToString)
-        MsgBox(b(3).ToString)
     End Sub
 End Class
