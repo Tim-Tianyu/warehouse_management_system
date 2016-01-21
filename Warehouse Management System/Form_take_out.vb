@@ -11,7 +11,7 @@ Public Class Form_take_out
 
     '****************************************************************************************************
     'when user click BT_search_worker button, means they want to find a worker
-    'this subroutine will open form_search and send information to form_search and tell form_search it need to search worker or material and tell it the resualt show return to which textbox on which form
+    'this subroutine will open form_search and send information to form_search and tell form_search it need to search worker or material and tell it the resualt should return to which textbox on which form
     '****************************************************************************************************
     Private Sub BT_search_worker_Click(sender As Object, e As EventArgs) Handles BT_search_worker.Click
         Form_search.LB_state.Text = "worker" 'tell form_search we need to search worker
@@ -23,7 +23,7 @@ Public Class Form_take_out
 
     '****************************************************************************************************
     'when user click BT_search_material button, means they want to find a material
-    'this subroutine will open form_search and send information to form_search and tell form_search it need to search worker or material and tell it the resualt show return to which textbox on which form
+    'this subroutine will open form_search and send information to form_search and tell form_search it need to search worker or material and tell it the resualt should return to which textbox on which form
     '****************************************************************************************************
     Private Sub BT_search_material_Click(sender As Object, e As EventArgs) Handles BT_search_material.Click
         Form_search.LB_state.Text = "material" 'tell form_search we need to search material
@@ -100,6 +100,9 @@ Public Class Form_take_out
                     sql_update.ExecuteNonQuery()
                     cs.Close()
                     MsgBox("success")
+                    If check_danger_line(material_id) >= stock - amount Then
+                        MsgBox("warning: the stock is below the danger line")
+                    End If
                     Me.Close()
                 End If
             End If
@@ -118,7 +121,7 @@ Public Class Form_take_out
             If a > 32767 Then 'the stock can not be bigger than 32767, i can not select stock here because user may not enter the id/name at this stage, but give a primary check still save a lot of time
                 LB_hint_amount.Text = "too big, must below stock"
                 check_state_amount = False
-            ElseIf a < 0 Then
+            ElseIf a < 1 Then
                 LB_hint_amount.Text = "only positive value"
                 check_state_amount = False
             End If
@@ -171,4 +174,22 @@ Public Class Form_take_out
     Private Sub Form_take_out_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
         Main_Form.Enabled = True
     End Sub
+
+    '****************************************************************************************************
+    'this function will return the dangerline of the material if it does not have dangerline it will return 0
+    '****************************************************************************************************
+    Private Function check_danger_line(id As Integer) As Integer
+        Dim sqlcmd As New SqlCommand("SELECT Mdanger_line FROM warehouse_material will Material_ID=@ID", cs)
+        sqlcmd.Parameters.Add("ID", SqlDbType.SmallInt).Value = id
+        Dim sqladapter As New SqlDataAdapter(sqlcmd)
+        Dim table As New DataTable
+        Dim dangerline As Integer = 0
+        sqladapter.Fill(table)
+        Try
+            dangerline = Int(table.Rows(0).Item(0))
+            Return dangerline
+        Catch ex As Exception
+            Return dangerline
+        End Try
+    End Function
 End Class

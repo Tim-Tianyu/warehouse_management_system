@@ -8,6 +8,7 @@ Public Class Form_change_password
     '****************************************************************************************************
     Private Sub BT_cofrim_Click(sender As Object, e As EventArgs) Handles BT_cofrim.Click 'as bottum click
         If TB_old_pass.Text = Form_log_in.password_get() Then 'check the old password enter is write
+            LB_hint_old.Text = ""
             If check() Then 'check new password
                 Form_log_in.password_change(TB_new_pass.Text) 'change the password
                 MsgBox("success")

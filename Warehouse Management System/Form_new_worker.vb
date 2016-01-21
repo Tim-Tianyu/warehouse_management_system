@@ -4,10 +4,15 @@ Public Class Form_new_worker
     Dim check_name As Boolean = False
     Dim sqlcs As String = ConfigurationManager.ConnectionStrings("connect").ConnectionString
     Dim cs As New SqlConnection(sqlcs)
+
+    'enable form_worker when this form closed
     Private Sub Form_new_worker_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
         Form_worker.Enabled = True
     End Sub
 
+    '****************************************************************************************************
+    'this subroutine will check the name entered by user when text in TB_name changed, it will check the length of string is below 4 or not, if yes it will check evert character in the the string is numeric or not, there should be no numeric character in the string
+    '****************************************************************************************************
     Private Sub TB_name_TextChanged(sender As Object, e As EventArgs) Handles TB_name.TextChanged 'check name
         Dim flag As Boolean
         Try
@@ -35,6 +40,9 @@ Public Class Form_new_worker
         check_name = flag
     End Sub
 
+    '****************************************************************************************************
+    'this subroutine will write card for the new worker using write()
+    '****************************************************************************************************
     Private Sub BT_confirm_Click(sender As Object, e As EventArgs) Handles BT_confirm.Click
         Me.Enabled = False
         If check_name Then
@@ -50,6 +58,9 @@ Public Class Form_new_worker
         Me.Enabled = True
     End Sub
 
+    '****************************************************************************************************
+    'this function will write card for the new worker at first it will read the card, if the card can be read, the card number will be generate by rnd() random number, than it will write the number into the card using MF_write(), than it will try to insert a new worker into warehouse_worker, because the worker_id is tiny int so it may catch an exception because of that
+    '****************************************************************************************************
     Private Function write() As Boolean
 
         Dim asnr(20) As Byte
@@ -90,11 +101,12 @@ Public Class Form_new_worker
                 cs.Open()
                 sqlcmd.ExecuteNonQuery()
                 cs.Close()
+                Return True
             Catch ex As Exception 'the worker number may become higher than 256 because the current number is around 100
                 MsgBox("no more worker can be added")
                 MsgBox(ex.ToString) 'make sure there is no other causes of exception
+                Return False
             End Try
-            Return True
         Else
             Return False 'if no card be readed
         End If

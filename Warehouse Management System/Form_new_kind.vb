@@ -1,5 +1,9 @@
 ﻿Imports System.Configuration
 Imports System.Data.SqlClient
+
+'****************************************************************************************************
+'this form is used to add new kind of material
+'****************************************************************************************************
 Public Class Form_new_kind
     Dim sqlcs As String = ConfigurationManager.ConnectionStrings("connect").ConnectionString
     Dim cs As New SqlConnection(sqlcs)
@@ -9,6 +13,10 @@ Public Class Form_new_kind
     Dim check_dangerline As Boolean = True 'can be null
 
     'notice: these 4 events blow all happened when textchange
+
+    '****************************************************************************************************
+    'this subroutine will check the amount entered by the user when the text change in TB_amount, if will use try catch to find the text enter is number or not, then it will check the number is positive and below 23767
+    '****************************************************************************************************
     Private Sub TB_amount_TextChanged(sender As Object, e As EventArgs) Handles TB_amount.TextChanged 'check amount
         Dim flag As Boolean = True 'if nothing goes wrong this will remain true
         Try
@@ -28,6 +36,9 @@ Public Class Form_new_kind
         check_amount = flag
     End Sub
 
+    '****************************************************************************************************
+    'this subroutine will check the amount entered by the user when the text change in TB_amount, it will use try catch to find the text enter is number or not, then it will check if the number is positive and below 32767（it can be null)
+    '****************************************************************************************************
     Private Sub TB_dangerline_TextChanged(sender As Object, e As EventArgs) Handles TB_dangerline.TextChanged 'check dangerline
         Dim flag As Boolean = True
         Try
@@ -49,6 +60,9 @@ Public Class Form_new_kind
         check_dangerline = flag
     End Sub
 
+    '****************************************************************************************************
+    'this subroutine will check the name entered by the user when the text change in TB_name, it will use try catch to find the text enter is string(useless), then it will check if the length of string is below 15
+    '****************************************************************************************************
     Private Sub TB_name_TextChanged(sender As Object, e As EventArgs) Handles TB_name.TextChanged 'check name
         Dim flag As Boolean = True
         Try
@@ -65,6 +79,9 @@ Public Class Form_new_kind
         check_name = flag
     End Sub
 
+    '****************************************************************************************************
+    'this subroutine will check the type entered by the user when the text change in TB_amount, it will use try catch to find the text enter is number or not, then it will check if the number is bigger than -32768 and below 32767（it can be null）
+    '****************************************************************************************************
     Private Sub TB_type_TextChanged(sender As Object, e As EventArgs) Handles TB_type.TextChanged 'similar to check dangerline
         Dim flag As Boolean = True
         Try
@@ -72,6 +89,9 @@ Public Class Form_new_kind
             LB_hint_type.Text = ""
             If a > 32767 Then
                 LB_hint_type.Text = "too big, should be less than 32767"
+                flag = False
+            ElseIf a < -32768 Then
+                LB_hint_type.Text = "too small, should br bigger than -32768"
                 flag = False
             End If
         Catch ex As Exception
@@ -83,6 +103,9 @@ Public Class Form_new_kind
         check_type = flag
     End Sub
 
+    '****************************************************************************************************
+    'this subroutine will insert the values into warehouse_material if the value entered is all valid
+    '****************************************************************************************************
     Private Sub BT_confirm_Click(sender As Object, e As EventArgs) Handles BT_confirm.Click 'when user click confirm
         If check_name And check_type And check_dangerline And check_amount Then 'only if all four is true
             Dim sqlcmd As New SqlCommand("INSERT INTO warehouse_material (Mname, Mtype, Mstock, Mdanger_line) VALUES (@name,@type,@amount,@dangerline)", cs) 'insert command
@@ -103,6 +126,7 @@ Public Class Form_new_kind
         End If
     End Sub
 
+    'enable form_new_material
     Private Sub Form_new_kind_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
         Form_new_material.Enabled = True
     End Sub

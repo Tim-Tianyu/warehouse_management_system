@@ -3,15 +3,18 @@ Imports System.Configuration
 Imports System.Data.SqlClient
 Imports Microsoft.VisualBasic
 Imports System.IO
-'Imports Warehouse_Management_System.warehouse_module(useless)
 Public Class Form_new_material
     Dim sqlcs As String = ConfigurationManager.ConnectionStrings("connect").ConnectionString
     Dim cs As New SqlConnection(sqlcs)
     Dim check_state_amount As Boolean = False 'status of priamry validation check of amount
+
+    'enable the main_form
     Private Sub Form_new_material_FormClosed(sender As Object, e As EventArgs) Handles Me.FormClosed
         Main_Form.Enabled = True
     End Sub
-
+    '****************************************************************************************************
+    'this subroutine will check the amount entered by the user when the text change in TB_amount, if will use try catch to find the text enter is number or not, then it will check the number is positive and below 32767
+    '****************************************************************************************************
     Private Sub TB_amount_TextChanged(sender As Object, e As EventArgs) Handles TB_amount.TextChanged 'primary check
         Try
             Dim a As Integer = Int(TB_amount.Text) 'if text is not numbers or is null this will cause an exception
@@ -30,7 +33,9 @@ Public Class Form_new_material
         End Try
     End Sub
 
-
+    '****************************************************************************************************
+    'this subroutine will check the material id/name entered by user using check_material, if the id/name is valid, it will then check if the total amount is more than 32767 or not, if no than it will insert a new record in warehouse_in_record and update the amount of the material in warehouse_material
+    '****************************************************************************************************
     Private Sub BT_confirm_Click(sender As Object, e As EventArgs) Handles BT_confirm.Click 'when user click confirm
         Dim sqlinsert_Record As New SqlCommand("INSERT INTO warehouse_in_record (Material_ID,Idatetime,Iamount) VALUES (@Material_ID,@Idatetime,@Iamount)", cs)
         Dim sqlupdate_Material As New SqlCommand("UPDATE warehouse_material SET Mstock = Mstock + @num WHERE Material_ID = @ID", cs)
@@ -72,6 +77,10 @@ Public Class Form_new_material
         End If
     End Sub
 
+    '****************************************************************************************************
+    'when user click BT_search button, means they want to find a material
+    'this subroutine will open form_search and send information to form_search and tell form_search it need to search worker or material and tell it the resualt should return to which textbox on which form
+    '****************************************************************************************************
     Private Sub BT_search_Click(sender As Object, e As EventArgs) Handles BT_search.Click
         Form_search.LB_state.Text = "material" 'tell form_search we need to search material
         Form_search.Find_TB("New material") 'tell the form_search the form call it
@@ -80,6 +89,7 @@ Public Class Form_new_material
         Me.Enabled = False
     End Sub
 
+    'show form_new_kind and disable this form
     Private Sub BT_new_kind_Click(sender As Object, e As EventArgs) Handles BT_new_kind.Click 'if user want to add a new kind of material
         Form_new_kind.Show()
         Me.Enabled = False
