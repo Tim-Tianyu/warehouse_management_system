@@ -61,7 +61,7 @@ Public Class Form_new_kind
     End Sub
 
     '****************************************************************************************************
-    'this subroutine will check the name entered by the user when the text change in TB_name, it will use try catch to find the text enter is string(useless), then it will check if the length of string is below 15
+    'this subroutine will check the name entered by the user when the text change in TB_name, it will use try catch to find the text enter is string(useless), then it will check if the length of string is below 15，and check if all of the character is none-numerical charc
     '****************************************************************************************************
     Private Sub TB_name_TextChanged(sender As Object, e As EventArgs) Handles TB_name.TextChanged 'check name
         Dim flag As Boolean = True
@@ -71,6 +71,16 @@ Public Class Form_new_kind
             If a.Length > 15 Then 'length can not be longer than 15
                 LB_hint_name.Text = "too long, should be 15 or less"
                 flag = False
+            Else
+                Dim i As Integer
+                For i = 0 To TB_name.Text.Length - 1
+                    If IsNumeric(TB_name.Text(i)) Then
+                        flag = False
+                    End If
+                Next
+                If Not flag Then
+                    LB_hint_name.Text = "can not contain numerical value"
+                End If
             End If
         Catch ex As Exception 'this exception may not be triggered any way
             LB_hint_name.Text = "please enter proper name"
@@ -110,9 +120,21 @@ Public Class Form_new_kind
         If check_name And check_type And check_dangerline And check_amount Then 'only if all four is true
             Dim sqlcmd As New SqlCommand("INSERT INTO warehouse_material (Mname, Mtype, Mstock, Mdanger_line) VALUES (@name,@type,@amount,@dangerline)", cs) 'insert command
             sqlcmd.Parameters.Add("@name", SqlDbType.NChar).Value = TB_name.Text
-            sqlcmd.Parameters.Add("@type", SqlDbType.SmallInt).Value = Int(TB_type.Text)
+            Try
+                Int(TB_type.Text)
+                sqlcmd.Parameters.Add("@type", SqlDbType.SmallInt).Value = Int(TB_type.Text)
+            Catch
+                Dim a As Integer
+                sqlcmd.Parameters.Add("@type", SqlDbType.SmallInt).Value = a
+            End Try
+            Try
+                Int(TB_dangerline.Text)
+                sqlcmd.Parameters.Add("@dangerline", SqlDbType.SmallInt).Value = Int(TB_dangerline.Text)
+            Catch
+                Dim b As Integer
+                sqlcmd.Parameters.Add("@dangerline", SqlDbType.SmallInt).Value = b
+            End Try
             sqlcmd.Parameters.Add("@amount", SqlDbType.SmallInt).Value = Int(TB_amount.Text)
-            sqlcmd.Parameters.Add("@dangerline", SqlDbType.SmallInt).Value = Int(TB_dangerline.Text) 'add parameters
             cs.Open()
             sqlcmd.ExecuteNonQuery() 'execute command
             cs.Close()
