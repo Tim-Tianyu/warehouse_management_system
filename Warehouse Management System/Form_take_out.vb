@@ -38,6 +38,9 @@ Public Class Form_take_out
     'this subroutine will check the worker id/name and material id/name use Check_material() and Check_worker(), if can not find id/name in the table, it will give user hint from the return value of Check_worker and Check_material, if the name/id is valid than it will check the state of worker and the current stock of the material, if the state is false or the number take out is bigger than stock, it will tell user, at last if all the information entered is valid, it will read the card of worker using scan() and if scan() return true(card is valid) it will insert a new record to warehouse_out_record and update the stock of that material in warehouse_material
     '****************************************************************************************************
     Private Sub BT_confirm_Click(sender As Object, e As EventArgs) Handles BT_confirm.Click
+        LB_hint_amount.Text = ""
+        LB_hint_material.Text = ""
+        LB_hint_worker.Text = ""
         Dim material_id As Integer = Check_material(TB_material.Text) 'check material name/id return id
         Dim worker_id As Integer = Check_worker(TB_worker.Text) 'check worker name/id return id
         ID = worker_id '77777 means no such id(if enter numbers), 88888 means no such name(if entered any non-numerical char), 99999 means user must enter id
@@ -73,7 +76,7 @@ Public Class Form_take_out
             Dim stock As Integer = tbl.Rows(0).Item(0) 'get the stock
             tbl.Clear() 'clear a table
             Dim sql_state As New SqlCommand("SELECT Wstate FROM warehouse_worker WHERE Worker_ID = @ID", cs) 'get the state of worker
-            sql_state.Parameters.Add("@ID", SqlDbType.TinyInt).Value = worker_id'add parameters
+            sql_state.Parameters.Add("@ID", SqlDbType.TinyInt).Value = worker_id 'add parameters
             Dim sqladp_state As New SqlDataAdapter(sql_state)
             sqladp_state.Fill(tbl)
             Dim state As Boolean = tbl.Rows(0).Item(1) 'actually I used Rows(0).Item(0) at first, but the value is null, I don't know why, maybe dim a new table is saver
@@ -125,10 +128,13 @@ Public Class Form_take_out
                 LB_hint_amount.Text = "only positive value"
                 check_state_amount = False
             End If
-        Catch ex As Exception 'this exception should not be triggered any time
-            MsgBox(ex.ToString)
-            LB_hint_amount.Text = "you should enter proper number"
-            check_state_amount = False
+        Catch ex As Exception
+            If ex.GetType.ToString = "System.OverflowException" Then
+                LB_hint_amount.Text = "too big, overflow"
+            Else
+                LB_hint_amount.Text = "you should enter number"
+                check_state_amount = False
+            End If
         End Try
     End Sub
 

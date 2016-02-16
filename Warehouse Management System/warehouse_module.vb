@@ -13,14 +13,18 @@ Module warehouse_module
         'Dim hint As String = ""
         Try
             a = Int(name) 'this line will have an error if name have any non-numeric char in it, if not that means it is an id
-            Dim sqlcommand As New SqlCommand("SELECT Material_ID FROM warehouse_material WHERE Material_ID=@ID", cs) 'select material name
-            sqlcommand.Parameters.Add("@ID", SqlDbType.SmallInt).Value = a 'id
-            Dim dbadptor As New SqlDataAdapter(sqlcommand)
-            Dim tbl As New DataTable()
-            dbadptor.Fill(tbl)
-            If tbl.Rows.Count = 0 Then 'if the id is not in table
-                'hint = "no such ID"
-                a = 77777 'this number can not become id because it is too big, i use this as a signal show that there is no such id
+            If a < 35768 Then
+                Dim sqlcommand As New SqlCommand("SELECT Material_ID FROM warehouse_material WHERE Material_ID=@ID", cs) 'select material name
+                sqlcommand.Parameters.Add("@ID", SqlDbType.SmallInt).Value = a 'id
+                Dim dbadptor As New SqlDataAdapter(sqlcommand)
+                Dim tbl As New DataTable()
+                dbadptor.Fill(tbl)
+                If tbl.Rows.Count = 0 Then 'if the id is not in table
+                    'hint = "no such ID"
+                    a = 77777 'this number can not become id because it is too big, i use this as a signal show that there is no such id
+                End If
+            Else
+                a = 77777
             End If
         Catch ex1 As Exception 'if there is a exception that means it is name not id
             Dim sqlcommand As New SqlCommand("SELECT Material_ID FROM warehouse_material WHERE Mname = @name", cs)
@@ -50,15 +54,20 @@ Module warehouse_module
         Dim cs As New SqlConnection(sqlcs)
         'Dim hint As String = ""
         Try
+
             a = Int(name) 'this line will have an error if name have any non-numeric char in it
-            Dim sqlcommand As New SqlCommand("SELECT Worker_ID FROM warehouse_worker WHERE Worker_ID=@ID", cs)
-            sqlcommand.Parameters.Add("@ID", SqlDbType.TinyInt).Value = a
-            Dim dbadptor As New SqlDataAdapter(sqlcommand)
-            Dim tbl As New DataTable()
-            dbadptor.Fill(tbl)
-            If tbl.Rows.Count = 0 Then 'if the id is not in table
-                'hint = "no such ID"
-                a = 77777 'this number can not become id because it is too big, i use this as a signal show that there is no such id
+            If a < 256 Then
+                Dim sqlcommand As New SqlCommand("SELECT Worker_ID FROM warehouse_worker WHERE Worker_ID=@ID", cs)
+                sqlcommand.Parameters.Add("@ID", SqlDbType.TinyInt).Value = a
+                Dim dbadptor As New SqlDataAdapter(sqlcommand)
+                Dim tbl As New DataTable()
+                dbadptor.Fill(tbl)
+                If tbl.Rows.Count = 0 Then 'if the id is not in table
+                    'hint = "no such ID"
+                    a = 77777 'this number can not become id because it is too big, i use this as a signal show that there is no such id
+                End If
+            Else
+                a = 77777
             End If
         Catch ex1 As Exception
             Dim sqlcommand As New SqlCommand("SELECT Worker_ID FROM warehouse_worker WHERE Wname = @name", cs)

@@ -28,8 +28,12 @@ Public Class Form_new_material
                 check_state_amount = False
             End If
         Catch ex As Exception 'not numbers
-            LB_hint_num.Text = "you should enter number"
-            check_state_amount = False
+            If ex.GetType.ToString = "System.OverflowException" Then
+                LB_hint_num.Text = "Too big, overflow"
+            Else
+                LB_hint_num.Text = "you should enter number"
+                check_state_amount = False
+            End If
         End Try
     End Sub
 
