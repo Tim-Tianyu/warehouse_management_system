@@ -204,18 +204,18 @@ Partial Class Main_Form
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(448, 74)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(89, 12)
+        Me.Label2.Size = New System.Drawing.Size(71, 12)
         Me.Label2.TabIndex = 24
-        Me.Label2.Text = "worker name/id"
+        Me.Label2.Text = "worker name"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(629, 74)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(101, 12)
+        Me.Label3.Size = New System.Drawing.Size(83, 12)
         Me.Label3.TabIndex = 25
-        Me.Label3.Text = "material name/id"
+        Me.Label3.Text = "material name"
         '
         'Label4
         '

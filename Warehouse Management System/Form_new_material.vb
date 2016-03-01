@@ -41,6 +41,7 @@ Public Class Form_new_material
     'this subroutine will check the material id/name entered by user using check_material, if the id/name is valid, it will then check if the total amount is more than 32767 or not, if no than it will insert a new record in warehouse_in_record and update the amount of the material in warehouse_material
     '****************************************************************************************************
     Private Sub BT_confirm_Click(sender As Object, e As EventArgs) Handles BT_confirm.Click 'when user click confirm
+        LB_hint_ID.Text = ""
         Dim sqlinsert_Record As New SqlCommand("INSERT INTO warehouse_in_record (Material_ID,Idatetime,Iamount) VALUES (@Material_ID,@Idatetime,@Iamount)", cs)
         Dim sqlupdate_Material As New SqlCommand("UPDATE warehouse_material SET Mstock = Mstock + @num WHERE Material_ID = @ID", cs)
         Dim sqlselect_Material As New SqlCommand("SELECT Mstock FROM warehouse_material WHERE Material_ID=@ID", cs)

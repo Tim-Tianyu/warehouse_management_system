@@ -23,8 +23,32 @@ Public Class Main_Form
         Dim sqlcomd As New SqlCommand("select Mname as 材料名,Mtype as 类型,Material_ID as 材料ID,Wname as 工人名,Wstate as 状态,Worker_ID as 工人ID,Onum_take as 取货量,Onum_left as 余货量,Odatetime as 时间 from warehouse_out_record, warehouse_worker, warehouse_material where (Material_ID_FK=Material_ID and Worker_ID_FK=Worker_ID) " + sqlstring(), cs) 'command to select the take out record and sqlstring is the condition
         Dim sqladp As New SqlDataAdapter(sqlcomd) 'dataadapter
         sqladp.Fill(table) 'fill the data to the table
+        DGV_record_table.DataSource = table
+    End Sub
+
+    '****************************************************************************************************
+    'when the form is enable again(after using other form) the data grid will be refreash
+    '****************************************************************************************************
+    Private Sub Main_Form_EnabledChanged(sender As Object, e As EventArgs) Handles Me.EnabledChanged 'after the enbale state changed
+        If Me.Enabled = True Then
+            table.Clear() 'clear the table
+            load_table() 'load datagrid again
+        End If
+    End Sub
+
+    '****************************************************************************************************
+    'when user close this form, user actually want to close the program, so we need to close form_log_in which is now invisible, then the whole program will be close
+    '****************************************************************************************************
+    Private Sub Main_Form_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed 'after tis form be close
+        Form_log_in.Close() 'form_log_in is actually the main from, close it to close the program
+    End Sub
+
+    '****************************************************************************************************
+    'when this form load, all the record will be load because no condition have given, and some porperty of the table will be rewrite
+    '****************************************************************************************************
+    Private Sub Main_Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load 'when this form be loaded
+        load_table() 'load datagrid view
         With DGV_record_table 'rewrite some poperty for datagridview
-            .DataSource = table
             .Columns("工人ID").Visible = False
             .Columns("材料ID").Visible = False
             .Columns("状态").Visible = False 'invisible initially
@@ -37,20 +61,6 @@ Public Class Main_Form
             .Columns("材料ID").Width = 50
             .Columns("时间").Width = 120 'change the width to make it easier to see
         End With
-    End Sub
-
-    '****************************************************************************************************
-    'when user close this form, user actually want to close the program, so we need to close form_log_in which is now invisible, then the whole program will be close
-    '****************************************************************************************************
-    Private Sub Main_Form_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed 'after tis form be close
-        Form_log_in.Close() 'form_log_in is actually the main from, close it to close the program
-    End Sub
-
-    '****************************************************************************************************
-    'when this form load, all the record will be load because no condition have given
-    '****************************************************************************************************
-    Private Sub Main_Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load 'when this form be loaded
-        load_table() 'load datagrid view
     End Sub
 
     '****************************************************************************************************
@@ -92,12 +102,12 @@ Public Class Main_Form
         ElseIf CB_year.Text.Length <> 0 Then 'or when it is null
             LB_hint_search.Text = "year in 4 numbers" 'give user a hint
         End If
-        If CB_month.Text.Length = 2 And IsNumeric(CB_month.Text) Then 'mm
+        If CB_month.Text.Length <= 2 And IsNumeric(CB_month.Text) Then 'mm
             STR = STR + " and month(Odatetime) ='" + CB_month.Text + "'" 'month
         ElseIf CB_month.Text.Length <> 0 Then
             LB_hint_search.Text = LB_hint_search.Text + " month in 2 numbers"
         End If
-        If CB_day.Text.Length = 2 And IsNumeric(CB_day.Text) Then 'dd
+        If CB_day.Text.Length <= 2 And IsNumeric(CB_day.Text) Then 'dd
             STR = STR + " and day(Odatetime) ='" + CB_day.Text + "'" 'day
         ElseIf CB_day.Text.Length <> 0 Then
             LB_hint_search.Text = LB_hint_search.Text + " day in 2 numbers"
@@ -210,4 +220,5 @@ Public Class Main_Form
 
         End If
     End Sub
+
 End Class

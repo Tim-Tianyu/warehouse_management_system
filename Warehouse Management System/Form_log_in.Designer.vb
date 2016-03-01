@@ -56,7 +56,6 @@ Partial Class Form_log_in
         '
         Me.TB_password.Location = New System.Drawing.Point(122, 138)
         Me.TB_password.Name = "TB_password"
-        Me.TB_password.PasswordChar = Global.Microsoft.VisualBasic.ChrW(34532)
         Me.TB_password.Size = New System.Drawing.Size(100, 21)
         Me.TB_password.TabIndex = 2
         '

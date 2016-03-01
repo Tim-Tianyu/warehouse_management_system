@@ -22,6 +22,9 @@ Public Class Form_new_worker
             If a.Length > 4 Then 'longest normal chinese name i know is only 4 characters
                 LB_hint_name.Text = "too long, should be 4 or less"
                 flag = False
+            ElseIf a.Length < 2 Then
+                LB_hint_name.Text = "too short, 2 or more"
+                flag = False
             Else
                 Dim i As Integer
                 For i = 0 To TB_name.Text.Length - 1
@@ -52,8 +55,6 @@ Public Class Form_new_worker
             Else
                 MsgBox("fail")
             End If
-        Else
-            LB_hint_name.Text = "please enter the name"
         End If
         Me.Enabled = True
     End Sub

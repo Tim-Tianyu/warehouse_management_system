@@ -185,7 +185,7 @@ Public Class Form_take_out
     'this function will return the dangerline of the material if it does not have dangerline it will return 0
     '****************************************************************************************************
     Private Function check_danger_line(id As Integer) As Integer
-        Dim sqlcmd As New SqlCommand("SELECT Mdanger_line FROM warehouse_material will Material_ID=@ID", cs)
+        Dim sqlcmd As New SqlCommand("SELECT Mdanger_line FROM warehouse_material WHERE Material_ID=@ID", cs)
         sqlcmd.Parameters.Add("ID", SqlDbType.SmallInt).Value = id
         Dim sqladapter As New SqlDataAdapter(sqlcmd)
         Dim table As New DataTable

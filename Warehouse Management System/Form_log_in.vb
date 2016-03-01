@@ -62,7 +62,7 @@ Public Class Form_log_in
     '****************************************************************************************************
     Public Sub password_change(new_password As String) 'change passward
         Dim sql_update As New SqlCommand("UPDATE warehouse_password SET password = @password WHERE ID = @ID", cs) 'sql update command
-        sql_update.Parameters.Add("password", SqlDbType.BigInt).Value = new_password 'add parameter password
+        sql_update.Parameters.Add("password", SqlDbType.VarChar).Value = new_password 'add parameter password
         If level Then 'boss
             sql_update.Parameters.Add("ID", SqlDbType.TinyInt).Value = 1 'ID
             password_high = new_password

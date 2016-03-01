@@ -57,7 +57,7 @@ Public Class Form_change_password
     'this function will return true if the character is alphabetical value
     '****************************************************************************************************
     Private Function isalpha(cha As Char) As Boolean 'check if cha is an alphabetical character
-        Return ((Asc(cha) >= 65) And (Asc(cha) <= 90))
+        Return ((Asc(cha) >= 65) And (Asc(cha) <= 90)) Or ((Asc(cha) >= 97) And (Asc(cha) <= 122))
     End Function
 
     '****************************************************************************************************

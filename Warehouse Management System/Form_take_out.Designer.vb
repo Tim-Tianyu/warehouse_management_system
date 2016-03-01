@@ -66,18 +66,18 @@ Partial Class Form_take_out
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(17, 82)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(71, 12)
+        Me.Label2.Size = New System.Drawing.Size(89, 12)
         Me.Label2.TabIndex = 3
-        Me.Label2.Text = "worker name"
+        Me.Label2.Text = "worker name/id"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(17, 132)
+        Me.Label3.Location = New System.Drawing.Point(5, 132)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(83, 12)
+        Me.Label3.Size = New System.Drawing.Size(101, 12)
         Me.Label3.TabIndex = 4
-        Me.Label3.Text = "material name"
+        Me.Label3.Text = "material name/id"
         '
         'Label4
         '

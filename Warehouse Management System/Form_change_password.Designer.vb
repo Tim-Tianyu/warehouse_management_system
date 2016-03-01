@@ -41,7 +41,6 @@ Partial Class Form_change_password
         Me.TB_old_pass.Name = "TB_old_pass"
         Me.TB_old_pass.Size = New System.Drawing.Size(100, 21)
         Me.TB_old_pass.TabIndex = 0
-        Me.TB_old_pass.UseSystemPasswordChar = True
         '
         'TB_new_pass
         '
@@ -49,7 +48,6 @@ Partial Class Form_change_password
         Me.TB_new_pass.Name = "TB_new_pass"
         Me.TB_new_pass.Size = New System.Drawing.Size(100, 21)
         Me.TB_new_pass.TabIndex = 1
-        Me.TB_new_pass.UseSystemPasswordChar = True
         '
         'TB_again
         '
@@ -57,7 +55,6 @@ Partial Class Form_change_password
         Me.TB_again.Name = "TB_again"
         Me.TB_again.Size = New System.Drawing.Size(100, 21)
         Me.TB_again.TabIndex = 2
-        Me.TB_again.UseSystemPasswordChar = True
         '
         'Label1
         '
