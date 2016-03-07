@@ -29,7 +29,6 @@ Partial Class Form_new_material
         Me.TB_amount = New System.Windows.Forms.TextBox()
         Me.BT_new_kind = New System.Windows.Forms.Button()
         Me.BT_confirm = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.BT_search = New System.Windows.Forms.Button()
         Me.LB_hint_num = New System.Windows.Forms.Label()
         Me.LB_hint_ID = New System.Windows.Forms.Label()
@@ -40,18 +39,18 @@ Partial Class Form_new_material
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(37, 103)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(65, 12)
+        Me.Label1.Size = New System.Drawing.Size(47, 12)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "name or id"
+        Me.Label1.Text = "名字/ID"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(37, 234)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(65, 12)
+        Me.Label2.Size = New System.Drawing.Size(29, 12)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "amount add"
+        Me.Label2.Text = "数量"
         '
         'TB_name
         '
@@ -73,7 +72,7 @@ Partial Class Form_new_material
         Me.BT_new_kind.Name = "BT_new_kind"
         Me.BT_new_kind.Size = New System.Drawing.Size(75, 45)
         Me.BT_new_kind.TabIndex = 4
-        Me.BT_new_kind.Text = "new kind of material"
+        Me.BT_new_kind.Text = "新材料"
         Me.BT_new_kind.UseVisualStyleBackColor = True
         '
         'BT_confirm
@@ -82,18 +81,8 @@ Partial Class Form_new_material
         Me.BT_confirm.Name = "BT_confirm"
         Me.BT_confirm.Size = New System.Drawing.Size(75, 23)
         Me.BT_confirm.TabIndex = 5
-        Me.BT_confirm.Text = "confirm"
+        Me.BT_confirm.Text = "确认"
         Me.BT_confirm.UseVisualStyleBackColor = True
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Calibri", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(84, 36)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(121, 24)
-        Me.Label3.TabIndex = 6
-        Me.Label3.Text = "new material"
         '
         'BT_search
         '
@@ -128,7 +117,6 @@ Partial Class Form_new_material
         Me.Controls.Add(Me.LB_hint_ID)
         Me.Controls.Add(Me.LB_hint_num)
         Me.Controls.Add(Me.BT_search)
-        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.BT_confirm)
         Me.Controls.Add(Me.BT_new_kind)
         Me.Controls.Add(Me.TB_amount)
@@ -138,7 +126,7 @@ Partial Class Form_new_material
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "Form_new_material"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form_new_material"
+        Me.Text = "材料入仓"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -149,7 +137,6 @@ Partial Class Form_new_material
     Friend WithEvents TB_amount As System.Windows.Forms.TextBox
     Friend WithEvents BT_new_kind As System.Windows.Forms.Button
     Friend WithEvents BT_confirm As System.Windows.Forms.Button
-    Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents BT_search As System.Windows.Forms.Button
     Friend WithEvents LB_hint_num As System.Windows.Forms.Label
     Friend WithEvents LB_hint_ID As System.Windows.Forms.Label

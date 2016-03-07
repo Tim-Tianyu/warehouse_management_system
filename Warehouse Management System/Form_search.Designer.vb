@@ -52,9 +52,9 @@ Partial Class Form_search
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(52, 38)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(197, 12)
+        Me.Label1.Size = New System.Drawing.Size(149, 12)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "enter part of the name to search"
+        Me.Label1.Text = "输入名字的一部分进行搜索"
         '
         'DGV_result
         '
@@ -74,7 +74,7 @@ Partial Class Form_search
         Me.BT_search.Name = "BT_search"
         Me.BT_search.Size = New System.Drawing.Size(75, 23)
         Me.BT_search.TabIndex = 4
-        Me.BT_search.Text = "search"
+        Me.BT_search.Text = "搜索"
         Me.BT_search.UseVisualStyleBackColor = True
         '
         'BT_confirm
@@ -83,7 +83,7 @@ Partial Class Form_search
         Me.BT_confirm.Name = "BT_confirm"
         Me.BT_confirm.Size = New System.Drawing.Size(75, 23)
         Me.BT_confirm.TabIndex = 5
-        Me.BT_confirm.Text = "confirm"
+        Me.BT_confirm.Text = "确认"
         Me.BT_confirm.UseVisualStyleBackColor = True
         '
         'Form_search
@@ -100,7 +100,7 @@ Partial Class Form_search
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "Form_search"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form_search"
+        Me.Text = "搜索"
         CType(Me.DGV_result, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

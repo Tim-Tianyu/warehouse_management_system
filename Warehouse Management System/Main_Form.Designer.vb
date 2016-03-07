@@ -71,7 +71,7 @@ Partial Class Main_Form
         Me.BT_save_as.Name = "BT_save_as"
         Me.BT_save_as.Size = New System.Drawing.Size(75, 23)
         Me.BT_save_as.TabIndex = 4
-        Me.BT_save_as.Text = "Save as"
+        Me.BT_save_as.Text = "另存为"
         Me.BT_save_as.UseVisualStyleBackColor = True
         '
         'BT_search
@@ -80,7 +80,7 @@ Partial Class Main_Form
         Me.BT_search.Name = "BT_search"
         Me.BT_search.Size = New System.Drawing.Size(75, 24)
         Me.BT_search.TabIndex = 5
-        Me.BT_search.Text = "search"
+        Me.BT_search.Text = "搜索"
         Me.BT_search.UseVisualStyleBackColor = True
         '
         'TB_worker_name
@@ -133,7 +133,7 @@ Partial Class Main_Form
         Me.BT_new_material.Name = "BT_new_material"
         Me.BT_new_material.Size = New System.Drawing.Size(186, 97)
         Me.BT_new_material.TabIndex = 14
-        Me.BT_new_material.Text = "new material come"
+        Me.BT_new_material.Text = "材料入仓"
         Me.BT_new_material.UseVisualStyleBackColor = True
         '
         'BT_out_material
@@ -142,7 +142,7 @@ Partial Class Main_Form
         Me.BT_out_material.Name = "BT_out_material"
         Me.BT_out_material.Size = New System.Drawing.Size(186, 97)
         Me.BT_out_material.TabIndex = 17
-        Me.BT_out_material.Text = "take out material"
+        Me.BT_out_material.Text = "材料出仓"
         Me.BT_out_material.UseVisualStyleBackColor = True
         '
         'BT_edit_worker
@@ -151,7 +151,7 @@ Partial Class Main_Form
         Me.BT_edit_worker.Name = "BT_edit_worker"
         Me.BT_edit_worker.Size = New System.Drawing.Size(186, 97)
         Me.BT_edit_worker.TabIndex = 18
-        Me.BT_edit_worker.Text = "management worker"
+        Me.BT_edit_worker.Text = "工人管理"
         Me.BT_edit_worker.UseVisualStyleBackColor = True
         '
         'BT_search_worker
@@ -204,45 +204,45 @@ Partial Class Main_Form
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(448, 74)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(71, 12)
+        Me.Label2.Size = New System.Drawing.Size(41, 12)
         Me.Label2.TabIndex = 24
-        Me.Label2.Text = "worker name"
+        Me.Label2.Text = "工人名"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(629, 74)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(83, 12)
+        Me.Label3.Size = New System.Drawing.Size(41, 12)
         Me.Label3.TabIndex = 25
-        Me.Label3.Text = "material name"
+        Me.Label3.Text = "材料名"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(816, 74)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(29, 12)
+        Me.Label4.Size = New System.Drawing.Size(17, 12)
         Me.Label4.TabIndex = 26
-        Me.Label4.Text = "year"
+        Me.Label4.Text = "年"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(866, 74)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(35, 12)
+        Me.Label5.Size = New System.Drawing.Size(17, 12)
         Me.Label5.TabIndex = 27
-        Me.Label5.Text = "month"
+        Me.Label5.Text = "月"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(901, 74)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(23, 12)
+        Me.Label6.Size = New System.Drawing.Size(17, 12)
         Me.Label6.TabIndex = 28
-        Me.Label6.Text = "day"
+        Me.Label6.Text = "日"
         '
         'BT_password
         '
@@ -250,7 +250,7 @@ Partial Class Main_Form
         Me.BT_password.Name = "BT_password"
         Me.BT_password.Size = New System.Drawing.Size(186, 97)
         Me.BT_password.TabIndex = 29
-        Me.BT_password.Text = "change passward"
+        Me.BT_password.Text = "密码修改"
         Me.BT_password.UseVisualStyleBackColor = True
         '
         'BT_log_out
@@ -259,7 +259,7 @@ Partial Class Main_Form
         Me.BT_log_out.Name = "BT_log_out"
         Me.BT_log_out.Size = New System.Drawing.Size(75, 23)
         Me.BT_log_out.TabIndex = 30
-        Me.BT_log_out.Text = "log out"
+        Me.BT_log_out.Text = "登出"
         Me.BT_log_out.UseVisualStyleBackColor = True
         '
         'LB_hint_search
@@ -305,7 +305,7 @@ Partial Class Main_Form
         Me.MinimumSize = New System.Drawing.Size(1000, 618)
         Me.Name = "Main_Form"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Warehouse Management System"
+        Me.Text = "仓库管理系统"
         CType(Me.DGV_record_table, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

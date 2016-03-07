@@ -23,17 +23,17 @@ Public Class Form_new_kind
         Try
             Dim a As Integer = Int(TB_amount.Text) 'this line will cause a exception, if it is not number
             If a > 32767 Then 'can not be too big
-                LB_hint_amount.Text = "too big, should be less than 32767"
+                LB_hint_amount.Text = "不能高于32767"
                 flag = False
             ElseIf a < 1 Then 'can not be negetive
-                LB_hint_amount.Text = "only positive value"
+                LB_hint_amount.Text = "不能低于一"
                 flag = False
             End If
         Catch ex As Exception 'if it is not number
             If ex.GetType.ToString = "System.OverflowException" Then
-                LB_hint_amount.Text = "too big, overflow"
+                LB_hint_amount.Text = "溢出"
             Else
-                LB_hint_amount.Text = "you should only enter number"
+                LB_hint_amount.Text = "应输入数字"
                 flag = False
             End If
         End Try
@@ -49,18 +49,18 @@ Public Class Form_new_kind
         Try
             Dim a As Integer = Int(TB_dangerline.Text) 'cause an exception if it is not a number
             If a > 32767 Then
-                LB_hint_dangerline.Text = "too big, should be less than 32767"
+                LB_hint_dangerline.Text = "不能高于32767"
                 flag = False
             ElseIf a < 1 Then
-                LB_hint_dangerline.Text = "only positive value"
+                LB_hint_dangerline.Text = "不能低于一"
                 flag = False
             End If
         Catch ex As Exception 'can only be number
             If TB_dangerline.Text <> "" Then 'can be null
                 If ex.GetType.ToString = "System.OverflowException" Then
-                    LB_hint_dangerline.Text = "too big, overflow"
+                    LB_hint_dangerline.Text = "溢出"
                 Else
-                    LB_hint_dangerline.Text = "you should only enter number"
+                    LB_hint_dangerline.Text = "应输入数字"
                     flag = False
                 End If
             End If
@@ -77,7 +77,7 @@ Public Class Form_new_kind
         Try
             Dim a As String = TB_name.Text
             If a.Length > 15 Then 'length can not be longer than 15
-                LB_hint_name.Text = "too long, should be 15 or less"
+                LB_hint_name.Text = "不能超过15个字符"
                 flag = False
             Else
                 Dim i As Integer
@@ -87,11 +87,11 @@ Public Class Form_new_kind
                     End If
                 Next
                 If Not flag Then
-                    LB_hint_name.Text = "can not contain numerical value"
+                    LB_hint_name.Text = "不得包含数字"
                 End If
             End If
         Catch ex As Exception 'this exception may not be triggered any way
-            LB_hint_name.Text = "please enter proper name"
+            LB_hint_name.Text = "请输入合法字符"
             flag = False
         End Try
         check_name = flag
@@ -106,18 +106,18 @@ Public Class Form_new_kind
         Try
             Dim a As Integer = Int(TB_type.Text)
             If a > 32767 Then
-                LB_hint_type.Text = "too big, should be less than 32767"
+                LB_hint_type.Text = "不能高于32767"
                 flag = False
             ElseIf a < -32768 Then
-                LB_hint_type.Text = "too small, should be bigger than -32768"
+                LB_hint_type.Text = "不能低于-32768"
                 flag = False
             End If
         Catch ex As Exception
             If TB_type.Text <> "" Then
                 If ex.GetType.ToString = "System.OverflowException" Then
-                    LB_hint_type.Text = "too big, overflow"
+                    LB_hint_type.Text = "溢出"
                 Else
-                    LB_hint_type.Text = "you should only enter number"
+                    LB_hint_type.Text = "应输入数字"
                     flag = False
                 End If
             End If
@@ -150,7 +150,7 @@ Public Class Form_new_kind
             cs.Open()
             sqlcmd.ExecuteNonQuery() 'execute command
             cs.Close()
-            MsgBox("success") 'tell user this is success
+            MsgBox("成功") 'tell user this is success
             Me.Close()
             'Else
             '    MsgBox(check_name.ToString)

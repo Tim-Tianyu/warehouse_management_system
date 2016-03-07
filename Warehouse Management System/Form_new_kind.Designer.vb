@@ -72,7 +72,7 @@ Partial Class Form_new_kind
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(29, 12)
         Me.Label2.TabIndex = 5
-        Me.Label2.Text = "name"
+        Me.Label2.Text = "名字"
         '
         'Label3
         '
@@ -81,25 +81,25 @@ Partial Class Form_new_kind
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(29, 12)
         Me.Label3.TabIndex = 6
-        Me.Label3.Text = "type"
+        Me.Label3.Text = "类型"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(51, 159)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(41, 12)
+        Me.Label4.Size = New System.Drawing.Size(29, 12)
         Me.Label4.TabIndex = 7
-        Me.Label4.Text = "amount"
+        Me.Label4.Text = "数量"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(51, 209)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(65, 12)
+        Me.Label5.Size = New System.Drawing.Size(41, 12)
         Me.Label5.TabIndex = 8
-        Me.Label5.Text = "dangerline"
+        Me.Label5.Text = "危险线"
         '
         'BT_confirm
         '
@@ -107,7 +107,7 @@ Partial Class Form_new_kind
         Me.BT_confirm.Name = "BT_confirm"
         Me.BT_confirm.Size = New System.Drawing.Size(75, 23)
         Me.BT_confirm.TabIndex = 9
-        Me.BT_confirm.Text = "confirm"
+        Me.BT_confirm.Text = "确认"
         Me.BT_confirm.UseVisualStyleBackColor = True
         '
         'LB_hint_name
@@ -163,7 +163,7 @@ Partial Class Form_new_kind
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "Form_new_kind"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "新货物"
+        Me.Text = "新材料"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

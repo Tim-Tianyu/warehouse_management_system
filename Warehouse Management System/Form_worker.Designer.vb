@@ -54,7 +54,7 @@ Partial Class Form_worker
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(47, 12)
         Me.Label1.TabIndex = 21
-        Me.Label1.Text = "name/id"
+        Me.Label1.Text = "姓名/ID"
         '
         'BT_add_new
         '
@@ -62,7 +62,7 @@ Partial Class Form_worker
         Me.BT_add_new.Name = "BT_add_new"
         Me.BT_add_new.Size = New System.Drawing.Size(75, 45)
         Me.BT_add_new.TabIndex = 23
-        Me.BT_add_new.Text = "Add new worker"
+        Me.BT_add_new.Text = "添加新员工"
         Me.BT_add_new.UseVisualStyleBackColor = True
         '
         'BT_confirm
@@ -71,7 +71,7 @@ Partial Class Form_worker
         Me.BT_confirm.Name = "BT_confirm"
         Me.BT_confirm.Size = New System.Drawing.Size(75, 23)
         Me.BT_confirm.TabIndex = 24
-        Me.BT_confirm.Text = "confirm"
+        Me.BT_confirm.Text = "确认"
         Me.BT_confirm.UseVisualStyleBackColor = True
         '
         'LB_hint_worker
@@ -87,9 +87,9 @@ Partial Class Form_worker
         Me.CB_state.AutoSize = True
         Me.CB_state.Location = New System.Drawing.Point(97, 152)
         Me.CB_state.Name = "CB_state"
-        Me.CB_state.Size = New System.Drawing.Size(54, 16)
+        Me.CB_state.Size = New System.Drawing.Size(48, 16)
         Me.CB_state.TabIndex = 26
-        Me.CB_state.Text = "state"
+        Me.CB_state.Text = "状态"
         Me.CB_state.UseVisualStyleBackColor = True
         '
         'Form_worker

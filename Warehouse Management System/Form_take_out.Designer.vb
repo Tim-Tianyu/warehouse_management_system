@@ -22,7 +22,6 @@ Partial Class Form_take_out
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.TB_worker = New System.Windows.Forms.TextBox()
         Me.TB_material = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -36,16 +35,6 @@ Partial Class Form_take_out
         Me.LB_hint_material = New System.Windows.Forms.Label()
         Me.LB_hint_amount = New System.Windows.Forms.Label()
         Me.SuspendLayout()
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(64, 28)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(155, 24)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "take out material"
         '
         'TB_worker
         '
@@ -66,27 +55,27 @@ Partial Class Form_take_out
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(17, 82)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(89, 12)
+        Me.Label2.Size = New System.Drawing.Size(59, 12)
         Me.Label2.TabIndex = 3
-        Me.Label2.Text = "worker name/id"
+        Me.Label2.Text = "工人名/ID"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(5, 132)
+        Me.Label3.Location = New System.Drawing.Point(17, 132)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(101, 12)
+        Me.Label3.Size = New System.Drawing.Size(59, 12)
         Me.Label3.TabIndex = 4
-        Me.Label3.Text = "material name/id"
+        Me.Label3.Text = "材料名/ID"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(17, 182)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(71, 12)
+        Me.Label4.Size = New System.Drawing.Size(29, 12)
         Me.Label4.TabIndex = 5
-        Me.Label4.Text = "amount take"
+        Me.Label4.Text = "数量"
         '
         'TB_amount
         '
@@ -101,7 +90,7 @@ Partial Class Form_take_out
         Me.BT_confirm.Name = "BT_confirm"
         Me.BT_confirm.Size = New System.Drawing.Size(75, 23)
         Me.BT_confirm.TabIndex = 7
-        Me.BT_confirm.Text = "confirm"
+        Me.BT_confirm.Text = "确认"
         Me.BT_confirm.UseVisualStyleBackColor = True
         '
         'BT_search_worker
@@ -163,16 +152,14 @@ Partial Class Form_take_out
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TB_material)
         Me.Controls.Add(Me.TB_worker)
-        Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "Form_take_out"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form_take_out"
+        Me.Text = "材料出仓"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents TB_worker As System.Windows.Forms.TextBox
     Friend WithEvents TB_material As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label

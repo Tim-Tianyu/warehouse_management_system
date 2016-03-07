@@ -20,10 +20,10 @@ Public Class Form_new_worker
             LB_hint_name.Text = ""
             flag = True
             If a.Length > 4 Then 'longest normal chinese name i know is only 4 characters
-                LB_hint_name.Text = "too long, should be 4 or less"
+                LB_hint_name.Text = "过长，不能超过四个字符"
                 flag = False
             ElseIf a.Length < 2 Then
-                LB_hint_name.Text = "too short, 2 or more"
+                LB_hint_name.Text = "过短，不能低于两个字符"
                 flag = False
             Else
                 Dim i As Integer
@@ -33,11 +33,11 @@ Public Class Form_new_worker
                     End If
                 Next
                 If Not flag Then
-                    LB_hint_name.Text = "can not contain numerical value"
+                    LB_hint_name.Text = "不能输入数字"
                 End If
             End If
         Catch ex As Exception 'this exception may not be triggered any way
-            LB_hint_name.Text = "please enter proper name"
+            LB_hint_name.Text = "请输入合法字符"
             flag = False
         End Try
         check_name = flag
@@ -50,10 +50,10 @@ Public Class Form_new_worker
         Me.Enabled = False
         If check_name Then
             If write() Then
-                MsgBox("success")
+                MsgBox("成功")
                 Me.Close()
             Else
-                MsgBox("fail")
+                MsgBox("失败")
             End If
         End If
         Me.Enabled = True
@@ -104,7 +104,7 @@ Public Class Form_new_worker
                 cs.Close()
                 Return True
             Catch ex As Exception 'the worker number may become higher than 256 because the current number is around 100
-                MsgBox("no more worker can be added")
+                MsgBox("工人已满")
                 MsgBox(ex.ToString) 'make sure there is no other causes of exception
                 Return False
             End Try

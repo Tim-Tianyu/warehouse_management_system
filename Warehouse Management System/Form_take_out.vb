@@ -46,24 +46,24 @@ Public Class Form_take_out
         ID = worker_id '77777 means no such id(if enter numbers), 88888 means no such name(if entered any non-numerical char), 99999 means user must enter id
         Select Case material_id 'give user hint from the return value
             Case Is = 77777
-                LB_hint_material.Text = "no such ID"
+                LB_hint_material.Text = "没有此ID"
                 material_id = 0
             Case Is = 88888
-                LB_hint_material.Text = "no such name"
+                LB_hint_material.Text = "没有此名"
                 material_id = 0
             Case Is = 99999
-                LB_hint_material.Text = "two or more have this name, must enter ID"
+                LB_hint_material.Text = "因重名，必须输入ID"
                 material_id = 0 'change id to zero, means fasle
         End Select
         Select Case worker_id 'same as upwards
             Case Is = 77777
-                LB_hint_worker.Text = "no such ID"
+                LB_hint_worker.Text = "没有此ID"
                 worker_id = 0
             Case Is = 88888
-                LB_hint_worker.Text = "no such name"
+                LB_hint_worker.Text = "没有此名"
                 worker_id = 0
             Case Is = 99999
-                LB_hint_worker.Text = "two or more have this name, must enter ID"
+                LB_hint_worker.Text = "因重名，必须输入ID"
                 worker_id = 0
         End Select
         If check_state_amount And worker_id <> 0 And material_id <> 0 Then 'only if primary check of amount, worker/material name/id is vaild
@@ -81,11 +81,11 @@ Public Class Form_take_out
             sqladp_state.Fill(tbl)
             Dim state As Boolean = tbl.Rows(0).Item(1) 'actually I used Rows(0).Item(0) at first, but the value is null, I don't know why, maybe dim a new table is saver
             If Not state Then 'at first i put this part in else in the if sentence below, but i found if stock<amount, user won't konw if the worker state is true or not at the first time, both the check of state and the check of amount need to be run at the first time
-                LB_hint_worker.Text = "this worker can not take out material"
+                LB_hint_worker.Text = "该工人无法拿取材料"
                 TB_worker.Focus()
             End If
             If stock < amount Then 'easy to understand
-                LB_hint_amount.Text = "still bigger than stock"
+                LB_hint_amount.Text = "仍比库存大"
                 TB_amount.Focus()
             ElseIf state Then 'this part will run only if state is true and stock>amount
                 If scan() Then 'will return true if card number is same as it in database
@@ -102,9 +102,9 @@ Public Class Form_take_out
                     sql_insert.ExecuteNonQuery()
                     sql_update.ExecuteNonQuery()
                     cs.Close()
-                    MsgBox("success")
+                    MsgBox("成功")
                     If check_danger_line(material_id) >= stock - amount Then
-                        MsgBox("warning: the stock is below the danger line")
+                        MsgBox("警告:库存低于危险线")
                     End If
                     Me.Close()
                 End If
@@ -122,17 +122,17 @@ Public Class Form_take_out
             LB_hint_amount.Text = ""
             check_state_amount = True
             If a > 32767 Then 'the stock can not be bigger than 32767, i can not select stock here because user may not enter the id/name at this stage, but give a primary check still save a lot of time
-                LB_hint_amount.Text = "too big, must below stock"
+                LB_hint_amount.Text = "不得高于库存"
                 check_state_amount = False
             ElseIf a < 1 Then
-                LB_hint_amount.Text = "only positive value"
+                LB_hint_amount.Text = "不得低于一"
                 check_state_amount = False
             End If
         Catch ex As Exception
             If ex.GetType.ToString = "System.OverflowException" Then
-                LB_hint_amount.Text = "too big, overflow"
+                LB_hint_amount.Text = "溢出"
             Else
-                LB_hint_amount.Text = "you should enter number"
+                LB_hint_amount.Text = "应输入数字"
                 check_state_amount = False
             End If
         End Try
@@ -165,11 +165,11 @@ Public Class Form_take_out
                 'ret = ControlBuzzer(1, 1, aBuffer(0))
                 Return True
             Else
-                MsgBox("wrong card")
+                MsgBox("错误的卡")
                 Return False
             End If
         Else 'ret <> 0 means fail to scan
-            MsgBox("fail to scan")
+            MsgBox("扫描失败")
             Return False
         End If
     End Function

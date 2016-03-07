@@ -21,17 +21,17 @@ Public Class Form_new_material
             LB_hint_num.Text = ""
             check_state_amount = True
             If a > 32767 Then 'can not be too big
-                LB_hint_num.Text = "Too big"
+                LB_hint_num.Text = "不能高于32767"
                 check_state_amount = False
             ElseIf a < 1 Then 'or negetive or zero
-                LB_hint_num.Text = "only positive value"
+                LB_hint_num.Text = "不能低于一"
                 check_state_amount = False
             End If
         Catch ex As Exception 'not numbers
             If ex.GetType.ToString = "System.OverflowException" Then
-                LB_hint_num.Text = "Too big, overflow"
+                LB_hint_num.Text = "溢出"
             Else
-                LB_hint_num.Text = "you should enter number"
+                LB_hint_num.Text = "只能输入数字"
                 check_state_amount = False
             End If
         End Try
@@ -48,13 +48,13 @@ Public Class Form_new_material
         Dim ID As Integer = Check_material(TB_name.Text) 'in warehouse_module
         Select Case ID 'use case because it is easier to read than if, but not faster :-)
             Case Is = 77777 'get the signal from Check_material function
-                LB_hint_ID.Text = "no such ID"
+                LB_hint_ID.Text = "没有此ID"
                 ID = 0 'id can not be eqaul to zero, use this to show no id be founded
             Case Is = 88888
-                LB_hint_ID.Text = "no such name"
+                LB_hint_ID.Text = "没有此名"
                 ID = 0
             Case Is = 99999
-                LB_hint_ID.Text = "two or more have this name, must enter ID"
+                LB_hint_ID.Text = "因重名，必须输入ID"
                 ID = 0
         End Select
         If check_state_amount And ID Then 'if amount primariy check is true and ID is not 0
@@ -73,10 +73,10 @@ Public Class Form_new_material
                 sqlinsert_Record.ExecuteNonQuery() 'in record table be inserted a new record
                 sqlupdate_Material.ExecuteNonQuery() 'update the amount in material table
                 cs.Close()
-                MsgBox("success")
+                MsgBox("成功")
                 Me.Close()
             Else
-                LB_hint_num.Text = "too big"
+                LB_hint_num.Text = "与库存的和不能超过32767"
                 TB_amount.Focus()
             End If
         End If

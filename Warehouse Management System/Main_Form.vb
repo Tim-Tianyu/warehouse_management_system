@@ -100,17 +100,17 @@ Public Class Main_Form
         If CB_year.Text.Length = 4 And IsNumeric(CB_year.Text) Then 'when the length is excatly 4 number yyyy
             STR = STR + " and year(Odatetime) ='" + CB_year.Text + "'" 'year
         ElseIf CB_year.Text.Length <> 0 Then 'or when it is null
-            LB_hint_search.Text = "year in 4 numbers" 'give user a hint
+            LB_hint_search.Text = "年份 4数字" 'give user a hint
         End If
         If CB_month.Text.Length <= 2 And IsNumeric(CB_month.Text) Then 'mm
             STR = STR + " and month(Odatetime) ='" + CB_month.Text + "'" 'month
         ElseIf CB_month.Text.Length <> 0 Then
-            LB_hint_search.Text = LB_hint_search.Text + " month in 2 numbers"
+            LB_hint_search.Text = LB_hint_search.Text + " 月份 2数字"
         End If
         If CB_day.Text.Length <= 2 And IsNumeric(CB_day.Text) Then 'dd
             STR = STR + " and day(Odatetime) ='" + CB_day.Text + "'" 'day
         ElseIf CB_day.Text.Length <> 0 Then
-            LB_hint_search.Text = LB_hint_search.Text + " day in 2 numbers"
+            LB_hint_search.Text = LB_hint_search.Text + " 日期 2数字"
         End If
         Return STR 'return the condition
     End Function
@@ -171,7 +171,7 @@ Public Class Main_Form
             Form_worker.Show()
             Me.Enabled = False
         Else
-            MsgBox("only boss can manage worker") 'oh no I'm not boss
+            MsgBox("只有项目管理员可以管理工人") 'oh no I'm not boss
         End If
     End Sub
 
@@ -213,7 +213,7 @@ Public Class Main_Form
             Try
                 oBook.SaveAs(SFD_save.FileName) 'save the file
                 oBook.Close()
-                MsgBox("success")
+                MsgBox("成功")
             Catch ex As Exception
                 MsgBox(ex.ToString)
             End Try

@@ -37,20 +37,20 @@ Partial Class Form_log_in
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("SimSun", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label1.Location = New System.Drawing.Point(51, 34)
+        Me.Label1.Location = New System.Drawing.Point(99, 32)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(188, 16)
+        Me.Label1.Size = New System.Drawing.Size(76, 16)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "warehouse management"
+        Me.Label1.Text = "仓库管理"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(63, 141)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(53, 12)
+        Me.Label2.Size = New System.Drawing.Size(29, 12)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "password"
+        Me.Label2.Text = "密码"
         '
         'TB_password
         '
@@ -65,7 +65,7 @@ Partial Class Form_log_in
         Me.BT_log_in.Name = "BT_log_in"
         Me.BT_log_in.Size = New System.Drawing.Size(75, 23)
         Me.BT_log_in.TabIndex = 3
-        Me.BT_log_in.Text = "log in"
+        Me.BT_log_in.Text = "登陆"
         Me.BT_log_in.UseVisualStyleBackColor = True
         '
         'LB_hint
@@ -81,21 +81,21 @@ Partial Class Form_log_in
         Me.RB_boss.AutoSize = True
         Me.RB_boss.Location = New System.Drawing.Point(65, 91)
         Me.RB_boss.Name = "RB_boss"
-        Me.RB_boss.Size = New System.Drawing.Size(47, 16)
+        Me.RB_boss.Size = New System.Drawing.Size(83, 16)
         Me.RB_boss.TabIndex = 5
-        Me.RB_boss.Text = "boss"
+        Me.RB_boss.Text = "项目管理员"
         Me.RB_boss.UseVisualStyleBackColor = True
         '
         'RB_manager
         '
         Me.RB_manager.AutoSize = True
         Me.RB_manager.Checked = True
-        Me.RB_manager.Location = New System.Drawing.Point(140, 91)
+        Me.RB_manager.Location = New System.Drawing.Point(154, 91)
         Me.RB_manager.Name = "RB_manager"
-        Me.RB_manager.Size = New System.Drawing.Size(65, 16)
+        Me.RB_manager.Size = New System.Drawing.Size(83, 16)
         Me.RB_manager.TabIndex = 6
         Me.RB_manager.TabStop = True
-        Me.RB_manager.Text = "manager"
+        Me.RB_manager.Text = "仓库管理员"
         Me.RB_manager.UseVisualStyleBackColor = True
         '
         'Form_log_in
@@ -113,7 +113,7 @@ Partial Class Form_log_in
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "Form_log_in"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form_log_in"
+        Me.Text = "登陆"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

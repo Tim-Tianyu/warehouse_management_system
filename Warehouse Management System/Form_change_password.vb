@@ -11,11 +11,11 @@ Public Class Form_change_password
             LB_hint_old.Text = ""
             If check() Then 'check new password
                 Form_log_in.password_change(TB_new_pass.Text) 'change the password
-                MsgBox("success")
+                MsgBox("成功")
                 Me.Close()
             End If
         Else
-            LB_hint_old.Text = "wrong old password"
+            LB_hint_old.Text = "密码错误"
             TB_old_pass.Clear()
             TB_old_pass.Focus()
         End If
@@ -30,10 +30,10 @@ Public Class Form_change_password
         LB_hint_again.Text = ""
         LB_hint_new.Text = ""
         If pass.Length < 4 Then 'check new pass
-            LB_hint_new.Text = "length can not smaller than 4"
+            LB_hint_new.Text = "长度不得低于4"
             state = False
         ElseIf pass.Length > 50 Then
-            LB_hint_new.Text = "length can not be more than 50"
+            LB_hint_new.Text = "长度不得高于50"
             state = False
         Else
             Dim i As Integer
@@ -43,12 +43,12 @@ Public Class Form_change_password
                 End If
             Next i
             If Not state Then 'becasue this part in else, so if state is false here, it can only because the character is not nmber of alpha
-                LB_hint_new.Text = "数字 和 字母"
+                LB_hint_new.Text = "只能输入数字和字母"
             End If
         End If
         If TB_again.Text <> TB_new_pass.Text Then 'check renter pass
             state = False
-            LB_hint_again.Text = "not same as new password"
+            LB_hint_again.Text = "两次输入不同"
         End If
         Return state
     End Function

@@ -29,7 +29,6 @@ Partial Class Form_change_password
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.BT_cofrim = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.LB_hint_old = New System.Windows.Forms.Label()
         Me.LB_hint_new = New System.Windows.Forms.Label()
         Me.LB_hint_again = New System.Windows.Forms.Label()
@@ -61,27 +60,27 @@ Partial Class Form_change_password
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(51, 69)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(77, 12)
+        Me.Label1.Size = New System.Drawing.Size(53, 12)
         Me.Label1.TabIndex = 3
-        Me.Label1.Text = "old password"
+        Me.Label1.Text = "当前密码"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(51, 129)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(77, 12)
+        Me.Label2.Size = New System.Drawing.Size(41, 12)
         Me.Label2.TabIndex = 4
-        Me.Label2.Text = "new password"
+        Me.Label2.Text = "新密码"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(51, 187)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(71, 12)
+        Me.Label3.Size = New System.Drawing.Size(53, 12)
         Me.Label3.TabIndex = 5
-        Me.Label3.Text = "enter again"
+        Me.Label3.Text = "再次输入"
         '
         'BT_cofrim
         '
@@ -89,18 +88,8 @@ Partial Class Form_change_password
         Me.BT_cofrim.Name = "BT_cofrim"
         Me.BT_cofrim.Size = New System.Drawing.Size(75, 23)
         Me.BT_cofrim.TabIndex = 6
-        Me.BT_cofrim.Text = "confirm"
+        Me.BT_cofrim.Text = "确认"
         Me.BT_cofrim.UseVisualStyleBackColor = True
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Calibri", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(63, 22)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(158, 24)
-        Me.Label4.TabIndex = 7
-        Me.Label4.Text = "Change Password"
         '
         'LB_hint_old
         '
@@ -134,7 +123,6 @@ Partial Class Form_change_password
         Me.Controls.Add(Me.LB_hint_again)
         Me.Controls.Add(Me.LB_hint_new)
         Me.Controls.Add(Me.LB_hint_old)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.BT_cofrim)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
@@ -145,7 +133,7 @@ Partial Class Form_change_password
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "Form_change_password"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form_change_password"
+        Me.Text = "密码修改"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -157,7 +145,6 @@ Partial Class Form_change_password
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents BT_cofrim As System.Windows.Forms.Button
-    Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents LB_hint_old As System.Windows.Forms.Label
     Friend WithEvents LB_hint_new As System.Windows.Forms.Label
     Friend WithEvents LB_hint_again As System.Windows.Forms.Label

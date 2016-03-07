@@ -28,13 +28,13 @@ Public Class Form_worker
         Dim worker_id As Integer = Check_worker(TB_worker.Text) 'check the worker name return id
         Select Case worker_id 'give hint from the return result
             Case Is = 77777
-                LB_hint_worker.Text = "no such ID"
+                LB_hint_worker.Text = "没有此ID"
                 worker_id = 0 'means it is wrong
             Case Is = 88888
-                LB_hint_worker.Text = "no such name"
+                LB_hint_worker.Text = "没有此名"
                 worker_id = 0
             Case Is = 99999
-                LB_hint_worker.Text = "two or more have this name, must enter ID"
+                LB_hint_worker.Text = "因重名，必须输入ID"
                 worker_id = 0
         End Select
         If worker_id <> 0 Then
@@ -44,7 +44,7 @@ Public Class Form_worker
             cs.Open()
             sql_update.ExecuteNonQuery() 'execute the command
             cs.Close()
-            MsgBox("success")
+            MsgBox("成功")
             Me.Close()
         End If
     End Sub

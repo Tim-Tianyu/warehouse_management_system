@@ -44,7 +44,7 @@ Partial Class Form_new_worker
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(29, 12)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "name"
+        Me.Label1.Text = "姓名"
         '
         'BT_confirm
         '
@@ -52,7 +52,7 @@ Partial Class Form_new_worker
         Me.BT_confirm.Name = "BT_confirm"
         Me.BT_confirm.Size = New System.Drawing.Size(117, 53)
         Me.BT_confirm.TabIndex = 2
-        Me.BT_confirm.Text = "confirm and write the ID card"
+        Me.BT_confirm.Text = "确认并写入ID卡"
         Me.BT_confirm.UseVisualStyleBackColor = True
         '
         'Label2
@@ -60,9 +60,9 @@ Partial Class Form_new_worker
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(85, 207)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(173, 24)
+        Me.Label2.Size = New System.Drawing.Size(137, 12)
         Me.Label2.TabIndex = 3
-        Me.Label2.Text = "tip: please put the card on " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the reader before confirm"
+        Me.Label2.Text = "请将ID卡放置在读卡器上"
         '
         'LB_hint
         '
@@ -94,7 +94,7 @@ Partial Class Form_new_worker
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "Form_new_worker"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form_new_worker"
+        Me.Text = "添加新工人"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

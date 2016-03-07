@@ -47,11 +47,11 @@ Public Class Form_log_in
             Main_Form.Show()
             Me.Hide()
         ElseIf TB_password.Text = "" Then
-            LB_hint.Text = "please enter password"
+            LB_hint.Text = "请输入密码"
         ElseIf num_check = 0 Then
             Me.Close()
         Else
-            LB_hint.Text = "you have " + num_check.ToString() + " more time to enter the password" 'tell user how many times left
+            LB_hint.Text = "你还有" + num_check.ToString() + "次输入密码的机会" 'tell user how many times left
             num_check -= 1 'chance minus one
         End If
         TB_password.Clear()
